@@ -16,6 +16,4 @@ const database = knex({
   },
 })
 
-database.migrate.latest()
-
 export default database
