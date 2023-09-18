@@ -47,6 +47,26 @@ class UserController {
       return res.status(500).json(`Error interno no Servidor!`)
     }
   }
+
+  public async updateUser(req: Request, res: Response) {
+    try {
+      const { name, email, password } = req.body
+      const { id } = req.params
+
+      if (!name || !email || !password) return res.status(400).json(`Credenciais não foram passadas!`)
+      if (!id) return res.status(400).json(`Id do Usuário Invalido!`)
+
+      const senha = await bcrypt.hash(password, 10)
+
+      const user = await UserModels.updateUser({ name, email, senha, id })
+
+      if (user?.invalid) return res.status(400).json(user.invalid)
+
+      return res.status(200).json({ message: `Usuário Atualizado Com Sucesso!`, user: user?.user })
+    } catch (e: any) {
+      return res.status(500).json(`Error interno no Servidor!`)
+    }
+  }
 }
 
 export default new UserController()
