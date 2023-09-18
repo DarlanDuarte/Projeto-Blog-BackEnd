@@ -22,3 +22,10 @@ export interface IPosts {
   description: string
   createAt: string
 }
+
+export interface IUpdatePost {
+  postId: number
+  userId: number | string
+  title: string
+  description: string
+}
