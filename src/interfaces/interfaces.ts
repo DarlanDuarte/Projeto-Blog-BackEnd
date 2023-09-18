@@ -14,3 +14,11 @@ export interface IUser {
 export type IJwtPayload = {
   userId: number | string
 }
+
+export interface IPosts {
+  id: number | string
+  userId: number | string
+  title: string
+  description: string
+  createAt: string
+}
