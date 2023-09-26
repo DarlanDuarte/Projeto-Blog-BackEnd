@@ -3,17 +3,25 @@ import dataFormatada from '../utils/formatDate'
 import { IPosts, IUpdatePost } from '../interfaces/interfaces'
 
 class PostModels {
-  public async createPosts({ title, description, id }: { title: string; description: string; id: string | number }) {
+  public async createPosts({
+    title,
+    description,
+    id,
+    image,
+  }: {
+    title: string
+    description: string
+    id: string | number
+    image: string | undefined
+  }) {
     try {
-      const result = await database.table('posts').insert({ title, description, userId: id, createAt: dataFormatada })
-
-      console.log(result)
+      const result = await database
+        .table('posts')
+        .insert({ title, description, userId: id, createAt: dataFormatada, image })
 
       if (result.length === 0) return { msgError: `Error ao Criar Post` }
 
       const resp = await database.table('posts').where({ userId: id }).select('*')
-
-      console.log(resp)
 
       return {
         resp: resp,
@@ -51,6 +59,21 @@ class PostModels {
     }
   }
 
+  public async getPostById({ id }: { id: number | string }) {
+    try {
+      const resp: IPosts[] = await database('posts').where({ id }).select('*')
+      console.log(resp)
+
+      if (resp.length === 0) return { error: `Nenhum Post Encontrado!` }
+
+      return {
+        resp: resp[0],
+      }
+    } catch (e: any) {
+      console.log(e.message)
+    }
+  }
+
   public async deletePost({ postId, userId }: { postId: number; userId: number | string }) {
     try {
       const resp = await database('posts').where({ id: postId, userId }).del()
@@ -70,8 +93,6 @@ class PostModels {
       const resp = await database('posts')
         .where({ id: postId, userId })
         .update({ title, description, createAt: dataFormatada })
-
-      console.log(resp)
 
       if (resp === 0) return { msgError: `Post não existe! Não foi possivel atualizar` }
 

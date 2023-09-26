@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import database from '../database/connection'
 import { IJwtPayload } from '../interfaces/interfaces'
+import dotenv from 'dotenv'
 
 const AuthMiddlewares = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -21,6 +22,7 @@ const AuthMiddlewares = async (req: Request, res: Response, next: NextFunction) 
 
     next()
   } catch (e: any) {
+    console.log(e.message)
     return res.status(500).json(`Error interno no Servidor`)
   }
 }
