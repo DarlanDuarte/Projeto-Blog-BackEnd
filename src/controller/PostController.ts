@@ -32,6 +32,7 @@ class PostsController {
   public async getPostsUser(req: Request, res: Response) {
     try {
       const { id } = req.userAuth
+      console.log(id)
 
       if (!id) return res.status(400).json(`Usuário não foi passado`)
 
@@ -71,9 +72,9 @@ class PostsController {
 
       if (post?.error) return res.status(400).json(post?.error)
 
-      const { id: postId, userId, title, description, createAt } = post?.resp as IPosts
+      const { id: postId, userId, title, description, createAt, image } = post?.resp as IPosts
 
-      return res.status(200).json({ postId, userId, title, description, createAt })
+      return res.status(200).json({ postId, userId, title, description, createAt, image })
     } catch (e: any) {
       console.log(e.message)
       return res.status(500).json(`Error Interno no Servidor!`)

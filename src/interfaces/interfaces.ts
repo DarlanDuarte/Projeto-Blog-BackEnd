@@ -21,6 +21,7 @@ export interface IPosts {
   title: string
   description: string
   createAt: string
+  image: string | null
 }
 
 export interface IUpdatePost {
