@@ -32,14 +32,16 @@ export interface IUpdatePost {
 }
 
 export interface ICreateComment {
-  comment: string
   userId: number | string | undefined
   postId: number | string
+  usuario: string | undefined
+  comment: string
 }
 
 export interface IComment {
   id: number | string
   userId: number | string
   postId: number | string
+  usuario: string
   comment: string
 }
