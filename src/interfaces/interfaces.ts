@@ -30,3 +30,16 @@ export interface IUpdatePost {
   title: string
   description: string
 }
+
+export interface ICreateComment {
+  comment: string
+  userId: number | string | undefined
+  postId: number | string
+}
+
+export interface IComment {
+  id: number | string
+  userId: number | string
+  postId: number | string
+  comment: string
+}
