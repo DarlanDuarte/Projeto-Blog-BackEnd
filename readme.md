@@ -3,7 +3,7 @@
 ## Tecnologias do Projeto
 
 **BackEnd:** `NodeJs` - `Express` - `Knex` - `Typescript` - `mysql2` \
-**Bibliotecas:** `bcrypt` - `cors` - `dotenv` - `jsonwebtoken` - `multer` - `sucrase`
+**Bibliotecas:** `bcrypt` - `cors` - `dotenv` - `jsonwebtoken` - `multer` - `sucrase` - `nodemon`
 
 ### Requisitos para Rodar o Projeto
 
