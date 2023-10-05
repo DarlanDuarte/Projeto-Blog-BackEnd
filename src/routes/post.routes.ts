@@ -6,8 +6,6 @@ import CorsMiddlewares from '../middlewares/corsmiddlewares'
 
 const postRouter = Router()
 
-postRouter.use(CorsMiddlewares)
-
 const storage = multer.diskStorage({
   destination(req, file, callback) {
     callback(null, './src/uploads')
