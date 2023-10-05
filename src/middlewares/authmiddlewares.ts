@@ -7,7 +7,7 @@ const AuthMiddlewares = async (req: Request, res: Response, next: NextFunction) 
   try {
     const { authorization } = req.headers
 
-    if (!authorization) return res.status(401).json(`Não Autorizado!`)
+    if (!authorization) return res.status(401).json(`Não Autorizado! Token foi foi passado.`)
 
     const token = authorization.split(' ')[1]
 
