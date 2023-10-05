@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import database from '../database/connection'
 import { IJwtPayload } from '../interfaces/interfaces'
-import dotenv from 'dotenv'
 
 const AuthMiddlewares = async (req: Request, res: Response, next: NextFunction) => {
   try {

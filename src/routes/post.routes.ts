@@ -2,8 +2,11 @@ import { Request, Router } from 'express'
 import PostController from '../controller/PostController'
 import AuthMiddlewares from '../middlewares/authmiddlewares'
 import multer, { FileFilterCallback } from 'multer'
+import CorsMiddlewares from '../middlewares/corsmiddlewares'
 
 const postRouter = Router()
+
+postRouter.use(CorsMiddlewares)
 
 const storage = multer.diskStorage({
   destination(req, file, callback) {
