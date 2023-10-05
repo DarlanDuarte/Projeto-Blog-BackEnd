@@ -17,7 +17,11 @@ class App {
   middlewares() {
     this.app.use(express.json())
     this.app.use('/uploads', express.static('src/uploads'))
-    this.app.use(cors())
+    this.app.use(
+      cors({
+        origin: ['http://localhost:3000', 'https://backend-blog-project.cyclic.app'],
+      }),
+    )
   }
 
   routes() {
