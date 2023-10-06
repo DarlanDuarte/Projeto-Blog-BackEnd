@@ -7,7 +7,7 @@ const postRouter = _express.Router.call(void 0, )
 
 const storage = _multer2.default.diskStorage({
   destination(req, file, callback) {
-    callback(null, '/uploads')
+    callback(null, 'uploads/')
   },
 
   filename(req, file, cb) {
@@ -16,7 +16,7 @@ const storage = _multer2.default.diskStorage({
 })
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
     cb(null, true)
   } else {
     cb(null, false)
