@@ -12,8 +12,7 @@ class PostsController {
       const { title, description } = req.body
       const { id } = req.userAuth
       let image = req.file?.path
-
-      image = image?.split('/').slice(1, 3).join('/')
+      console.log(image)
 
       if (!title || !description) return res.status(400).json({ error: `Titulo ou Descrição não foram passados!` })
       if (!id) return res.status(400).json({ error: `Usuário do Post não existe!` })

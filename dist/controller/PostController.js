@@ -12,17 +12,16 @@ class PostsController {
       const { title, description } = req.body
       const { id } = req.userAuth
       let image = _optionalChain([req, 'access', _ => _.file, 'optionalAccess', _2 => _2.path])
-
-      image = _optionalChain([image, 'optionalAccess', _3 => _3.split, 'call', _4 => _4('/'), 'access', _5 => _5.slice, 'call', _6 => _6(1, 3), 'access', _7 => _7.join, 'call', _8 => _8('/')])
+      console.log(image)
 
       if (!title || !description) return res.status(400).json({ error: `Titulo ou Descrição não foram passados!` })
       if (!id) return res.status(400).json({ error: `Usuário do Post não existe!` })
 
       const post = await _PostModels2.default.createPosts({ title, description, id, image })
 
-      if (_optionalChain([post, 'optionalAccess', _9 => _9.msgError])) return res.status(400).json(post.msgError)
+      if (_optionalChain([post, 'optionalAccess', _3 => _3.msgError])) return res.status(400).json(post.msgError)
 
-      return res.status(201).json({ msg: `Post Criado com Sucesso!`, Post: _optionalChain([post, 'optionalAccess', _10 => _10.resp]) })
+      return res.status(201).json({ msg: `Post Criado com Sucesso!`, Post: _optionalChain([post, 'optionalAccess', _4 => _4.resp]) })
     } catch (e) {
       console.log(e.message)
       return res.status(500).json(`Error interno no Servidor!`)
@@ -38,9 +37,9 @@ class PostsController {
 
       const postsUser = await _PostModels2.default.getPostsUser({ id })
 
-      if (_optionalChain([postsUser, 'optionalAccess', _11 => _11.msgError])) return res.status(400).json(postsUser.msgError)
+      if (_optionalChain([postsUser, 'optionalAccess', _5 => _5.msgError])) return res.status(400).json(postsUser.msgError)
 
-      const { ...posts } = _optionalChain([postsUser, 'optionalAccess', _12 => _12.posts]) 
+      const { ...posts } = _optionalChain([postsUser, 'optionalAccess', _6 => _6.posts]) 
 
       return res.status(200).json({ posts })
     } catch (e) {
@@ -52,9 +51,9 @@ class PostsController {
     try {
       const posts = await _PostModels2.default.getAllPosts()
 
-      if (_optionalChain([posts, 'optionalAccess', _13 => _13.msgError])) return res.status(400).json(posts.msgError)
+      if (_optionalChain([posts, 'optionalAccess', _7 => _7.msgError])) return res.status(400).json(posts.msgError)
 
-      const { ...allPosts } = _optionalChain([posts, 'optionalAccess', _14 => _14.resp])
+      const { ...allPosts } = _optionalChain([posts, 'optionalAccess', _8 => _8.resp])
 
       return res.status(200).json(allPosts)
     } catch (e) {
@@ -70,9 +69,9 @@ class PostsController {
 
       const post = await _PostModels2.default.getPostById({ id })
 
-      if (_optionalChain([post, 'optionalAccess', _15 => _15.error])) return res.status(400).json(_optionalChain([post, 'optionalAccess', _16 => _16.error]))
+      if (_optionalChain([post, 'optionalAccess', _9 => _9.error])) return res.status(400).json(_optionalChain([post, 'optionalAccess', _10 => _10.error]))
 
-      const { id: postId, userId, title, description, createAt, image } = _optionalChain([post, 'optionalAccess', _17 => _17.resp]) 
+      const { id: postId, userId, title, description, createAt, image } = _optionalChain([post, 'optionalAccess', _11 => _11.resp]) 
 
       return res.status(200).json({ postId, userId, title, description, createAt, image })
     } catch (e) {
@@ -94,7 +93,7 @@ class PostsController {
 
       const post = await _PostModels2.default.deletePost({ postId, userId })
 
-      if (_optionalChain([post, 'optionalAccess', _18 => _18.msgError])) return res.status(400).json(post.msgError)
+      if (_optionalChain([post, 'optionalAccess', _12 => _12.msgError])) return res.status(400).json(post.msgError)
 
       return res.status(200).json({ sucess: 'Post deletado com sucesso!' })
     } catch (e) {
@@ -116,7 +115,7 @@ class PostsController {
 
       const post = await _PostModels2.default.updatePost({ postId, userId, title, description })
 
-      return res.status(200).json({ success: `Post Atualizado com sucesso!`, post: _optionalChain([post, 'optionalAccess', _19 => _19.post]) })
+      return res.status(200).json({ success: `Post Atualizado com sucesso!`, post: _optionalChain([post, 'optionalAccess', _13 => _13.post]) })
     } catch (e) {
       return res.status(500).json(`Error interno no Servidor!`)
     }

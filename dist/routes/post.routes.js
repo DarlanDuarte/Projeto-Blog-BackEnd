@@ -1,37 +1,10 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _express = require('express');
 var _PostController = require('../controller/PostController'); var _PostController2 = _interopRequireDefault(_PostController);
 var _authmiddlewares = require('../middlewares/authmiddlewares'); var _authmiddlewares2 = _interopRequireDefault(_authmiddlewares);
-var _multer = require('multer'); var _multer2 = _interopRequireDefault(_multer);
-
+var _uploadmiddlewares = require('../middlewares/uploadmiddlewares'); var _uploadmiddlewares2 = _interopRequireDefault(_uploadmiddlewares);
 const postRouter = _express.Router.call(void 0, )
 
-const storage = _multer2.default.diskStorage({
-  destination(req, file, callback) {
-    callback(null, 'uploads/')
-  },
-
-  filename(req, file, cb) {
-    cb(null, new Date().getTime() + file.originalname)
-  },
-})
-
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
-    cb(null, true)
-  } else {
-    cb(null, false)
-  }
-}
-
-const upload = _multer2.default.call(void 0, {
-  storage: storage,
-  limits: {
-    fieldSize: 1024 * 1024 * 5,
-  },
-  fileFilter: fileFilter,
-})
-
-postRouter.post('/posts', _authmiddlewares2.default, upload.single('image'), _PostController2.default.createPosts)
+postRouter.post('/posts', _authmiddlewares2.default, _uploadmiddlewares2.default.single('image'), _PostController2.default.createPosts)
 
 postRouter.get('/user/posts', _authmiddlewares2.default, _PostController2.default.getPostsUser)
 postRouter.get('/posts', _PostController2.default.getAllPost)
