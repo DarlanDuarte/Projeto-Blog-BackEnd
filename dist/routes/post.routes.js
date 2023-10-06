@@ -2,6 +2,7 @@
 var _PostController = require('../controller/PostController'); var _PostController2 = _interopRequireDefault(_PostController);
 var _authmiddlewares = require('../middlewares/authmiddlewares'); var _authmiddlewares2 = _interopRequireDefault(_authmiddlewares);
 var _multer = require('multer'); var _multer2 = _interopRequireDefault(_multer);
+var _corsmiddlewares = require('../middlewares/corsmiddlewares'); var _corsmiddlewares2 = _interopRequireDefault(_corsmiddlewares);
 
 const postRouter = _express.Router.call(void 0, )
 
@@ -30,6 +31,8 @@ const upload = _multer2.default.call(void 0, {
   },
   fileFilter: fileFilter,
 })
+
+postRouter.use(_corsmiddlewares2.default)
 
 postRouter.post('/posts', _authmiddlewares2.default, upload.single('image'), _PostController2.default.createPosts)
 

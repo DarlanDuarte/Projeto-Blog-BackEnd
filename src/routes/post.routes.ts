@@ -2,6 +2,7 @@ import { Request, Router } from 'express'
 import PostController from '../controller/PostController'
 import AuthMiddlewares from '../middlewares/authmiddlewares'
 import multer, { FileFilterCallback } from 'multer'
+import CorsMiddlewares from '../middlewares/corsmiddlewares'
 
 const postRouter = Router()
 
@@ -30,6 +31,8 @@ const upload = multer({
   },
   fileFilter: fileFilter,
 })
+
+postRouter.use(CorsMiddlewares)
 
 postRouter.post('/posts', AuthMiddlewares, upload.single('image'), PostController.createPosts)
 
