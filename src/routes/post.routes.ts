@@ -25,8 +25,9 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
 
 const upload = multer({
   storage: storage,
-
-  fileFilter: fileFilter,
+  limits: {
+    fieldSize: 1024 * 1024 * 5,
+  },
 })
 
 postRouter.post('/posts', AuthMiddlewares, upload.single('image'), PostController.createPosts)

@@ -25,8 +25,9 @@ const fileFilter = (req, file, cb) => {
 
 const upload = _multer2.default.call(void 0, {
   storage: storage,
-
-  fileFilter: fileFilter,
+  limits: {
+    fieldSize: 1024 * 1024 * 5,
+  },
 })
 
 postRouter.post('/posts', _authmiddlewares2.default, upload.single('image'), _PostController2.default.createPosts)
