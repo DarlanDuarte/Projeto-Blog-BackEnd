@@ -4,6 +4,7 @@ import userRouter from './routes/user.routes'
 import authRouter from './routes/auth.routes'
 import postRouter from './routes/post.routes'
 import commentRouter from './routes/comment.routes'
+import CorsMiddlewares from './middlewares/corsmiddlewares'
 
 class App {
   public app: express.Application
@@ -17,6 +18,7 @@ class App {
   middlewares() {
     this.app.use(express.json())
     this.app.use(cors())
+    this.app.use(CorsMiddlewares)
     this.app.use('/uploads', express.static('uploads'))
   }
 
