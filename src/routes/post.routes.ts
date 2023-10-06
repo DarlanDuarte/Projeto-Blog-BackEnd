@@ -28,6 +28,7 @@ const upload = multer({
   limits: {
     fieldSize: 1024 * 1024 * 5,
   },
+  fileFilter: fileFilter,
 })
 
 postRouter.post('/posts', AuthMiddlewares, upload.single('image'), PostController.createPosts)
