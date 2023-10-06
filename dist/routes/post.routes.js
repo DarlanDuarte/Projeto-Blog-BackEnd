@@ -2,6 +2,7 @@
 var _PostController = require('../controller/PostController'); var _PostController2 = _interopRequireDefault(_PostController);
 var _authmiddlewares = require('../middlewares/authmiddlewares'); var _authmiddlewares2 = _interopRequireDefault(_authmiddlewares);
 var _uploadmiddlewares = require('../middlewares/uploadmiddlewares'); var _uploadmiddlewares2 = _interopRequireDefault(_uploadmiddlewares);
+
 const postRouter = _express.Router.call(void 0, )
 
 postRouter.post('/posts', _authmiddlewares2.default, _uploadmiddlewares2.default.single('image'), _PostController2.default.createPosts)

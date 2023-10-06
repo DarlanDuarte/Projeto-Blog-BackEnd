@@ -2,6 +2,7 @@ import { Request, Router } from 'express'
 import PostController from '../controller/PostController'
 import AuthMiddlewares from '../middlewares/authmiddlewares'
 import upload from '../middlewares/uploadmiddlewares'
+import CorsMiddlewares from '../middlewares/corsmiddlewares'
 const postRouter = Router()
 
 postRouter.post('/posts', AuthMiddlewares, upload.single('image'), PostController.createPosts)

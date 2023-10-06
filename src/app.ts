@@ -18,7 +18,6 @@ class App {
   middlewares() {
     this.app.use(express.json())
     this.app.use(cors())
-    this.app.use(CorsMiddlewares)
     this.app.use('/uploads', express.static('uploads'))
   }
 

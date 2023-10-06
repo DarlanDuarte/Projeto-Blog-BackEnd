@@ -4,7 +4,7 @@ var _userroutes = require('./routes/user.routes'); var _userroutes2 = _interopRe
 var _authroutes = require('./routes/auth.routes'); var _authroutes2 = _interopRequireDefault(_authroutes);
 var _postroutes = require('./routes/post.routes'); var _postroutes2 = _interopRequireDefault(_postroutes);
 var _commentroutes = require('./routes/comment.routes'); var _commentroutes2 = _interopRequireDefault(_commentroutes);
-var _corsmiddlewares = require('./middlewares/corsmiddlewares'); var _corsmiddlewares2 = _interopRequireDefault(_corsmiddlewares);
+
 
 class App {
   
@@ -18,7 +18,6 @@ class App {
   middlewares() {
     this.app.use(_express2.default.json())
     this.app.use(_cors2.default.call(void 0, ))
-    this.app.use(_corsmiddlewares2.default)
     this.app.use('/uploads', _express2.default.static('uploads'))
   }
 
