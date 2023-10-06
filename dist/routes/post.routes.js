@@ -1,21 +1,13 @@
-'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj }
-}
-var _express = require('express')
-var _PostController = require('../controller/PostController')
-var _PostController2 = _interopRequireDefault(_PostController)
-var _authmiddlewares = require('../middlewares/authmiddlewares')
-var _authmiddlewares2 = _interopRequireDefault(_authmiddlewares)
-var _multer = require('multer')
-var _multer2 = _interopRequireDefault(_multer)
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _express = require('express');
+var _PostController = require('../controller/PostController'); var _PostController2 = _interopRequireDefault(_PostController);
+var _authmiddlewares = require('../middlewares/authmiddlewares'); var _authmiddlewares2 = _interopRequireDefault(_authmiddlewares);
+var _multer = require('multer'); var _multer2 = _interopRequireDefault(_multer);
 
-const postRouter = _express.Router.call(void 0)
+const postRouter = _express.Router.call(void 0, )
 
 const storage = _multer2.default.diskStorage({
   destination(req, file, callback) {
-    callback(null, './dist/uploads')
+    callback(null, '/uploads')
   },
 
   filename(req, file, cb) {
@@ -48,4 +40,4 @@ postRouter.get('/posts/:id', _PostController2.default.getPostById)
 postRouter.delete('/posts/:id', _authmiddlewares2.default, _PostController2.default.deletePost)
 postRouter.put('/posts/:id', _authmiddlewares2.default, _PostController2.default.updatePost)
 
-exports.default = postRouter
+exports. default = postRouter

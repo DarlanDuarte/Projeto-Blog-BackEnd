@@ -7,7 +7,7 @@ const postRouter = Router()
 
 const storage = multer.diskStorage({
   destination(req, file, callback) {
-    callback(null, './src/uploads')
+    callback(null, '/uploads')
   },
 
   filename(req, file, cb) {

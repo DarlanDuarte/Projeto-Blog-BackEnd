@@ -3,12 +3,11 @@ var _jsonwebtoken = require('jsonwebtoken'); var _jsonwebtoken2 = _interopRequir
 var _connection = require('../database/connection'); var _connection2 = _interopRequireDefault(_connection);
 
 
-
 const AuthMiddlewares = async (req, res, next) => {
   try {
     const { authorization } = req.headers
 
-    if (!authorization) return res.status(401).json(`Não Autorizado!`)
+    if (!authorization) return res.status(401).json(`Não Autorizado! Token não foi foi passado.`)
 
     const token = authorization.split(' ')[1]
 
