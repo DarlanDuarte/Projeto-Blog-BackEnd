@@ -29,6 +29,9 @@ const fileFilter = (req, file, cb) => {
 
 const upload = _multer2.default.call(void 0, {
   storage: _multer2.default.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
 })
 
 exports. default = upload
