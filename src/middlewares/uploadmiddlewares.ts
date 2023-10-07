@@ -1,7 +1,7 @@
 import { Request } from 'express'
 import multer, { FileFilterCallback } from 'multer'
 
-const storage = multer.diskStorage({
+/* const storage = multer.diskStorage({
   destination(req, file, callback) {
     callback(null, 'uploads/')
   },
@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
   filename(req, file, cb) {
     cb(null, new Date().getTime() + file.originalname)
   },
-})
+}) */
 
 const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
@@ -19,12 +19,16 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
   }
 }
 
-const upload = multer({
+/* const upload = multer({
   storage: storage,
   limits: {
-    fieldSize: 1024 * 1024 * 5,
+    fieldSize: 5 * 1024 * 1024,
   },
   fileFilter: fileFilter,
+}) */
+
+const upload = multer({
+  storage: multer.memoryStorage(),
 })
 
 export default upload

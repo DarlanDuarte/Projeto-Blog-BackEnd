@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
 import PostModels from '../models/PostModels'
 import { IPosts, IUser } from '../interfaces/interfaces'
-import path from 'path'
+import { google } from 'googleapis'
+import { Readable } from 'stream'
 
 class PostsController {
   public async createPosts(req: Request, res: Response) {
@@ -11,8 +12,46 @@ class PostsController {
 
       const { title, description } = req.body
       const { id } = req.userAuth
-      let image = req.file?.path
-      console.log(image)
+      /* let image = req.file?.path */
+      console.log(req.file)
+
+      const GOOGLE_API_ID = '1MM3LyPiBi3h7twCKfdFNA20rzB-PhTiw'
+
+      const originalName: string | undefined = req.file?.originalname
+      const fileName = `${new Date().getTime()}_${originalName}`
+
+      if (!req.file) {
+        return res.status(400).json({ error: `Imagem não foi passada!` })
+      }
+
+      const auth = new google.auth.GoogleAuth({
+        keyFile: './googledrive.json',
+        scopes: ['https://www.googleapis.com/auth/drive'],
+      })
+
+      const driveServices = google.drive({
+        version: 'v3',
+        auth,
+      })
+
+      const media = {
+        mimeType: req.file?.mimetype,
+        body: Readable.from(req.file?.buffer),
+      }
+
+      const response = await driveServices.files.create({
+        requestBody: {
+          name: fileName,
+          parents: [GOOGLE_API_ID],
+        },
+        media: media,
+      })
+
+      console.log(response.data)
+
+      const imageId = response.data.id
+
+      const image = `https://drive.google.com/uc?id=${imageId}`
 
       if (!title || !description) return res.status(400).json({ error: `Titulo ou Descrição não foram passados!` })
       if (!id) return res.status(400).json({ error: `Usuário do Post não existe!` })
