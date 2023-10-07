@@ -51,7 +51,7 @@ class PostsController {
 
       const imageId = response.data.id
 
-      const image = `https://drive.google.com/uc?id=${imageId}`
+      const image = `https://drive.google.com/uc?export=view&id=${imageId}`
 
       if (!title || !description) return res.status(400).json({ error: `Titulo ou Descrição não foram passados!` })
       if (!id) return res.status(400).json({ error: `Usuário do Post não existe!` })

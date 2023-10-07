@@ -31,6 +31,7 @@ Esse Projeto Precisa das seguintes Tecnologias
 - **Pegando Comentários das Postagens**
 - **Data de criação da postagem**
 - **Pegando Imagens do Post Através da Biblioteca Multer**
+- **Salvando imagens no googleDrive usando o Googleapis**
 
 ## Referências
 
@@ -203,7 +204,7 @@ GET /posts/id
 DELETE /posts/id
 ```
 
-| LocalStorage    | Tipo               | Descrição                                  | Obrigatório |
+| Authorization   | Tipo               | Descrição                                  | Obrigatório |
 | :-------------- | :----------------- | :----------------------------------------- | :---------- |
 | `Authorization` | `string`           | **JWT**                                    | true        |
 | `id`            | `number ou string` | **Id do Usuário passado no authorization** | true        |
@@ -214,7 +215,7 @@ DELETE /posts/id
 UPDATE /posts/id
 ```
 
-| LocalStorage    | Tipo               | Descrição                                  | Obrigatório |
+| Authorization   | Tipo               | Descrição                                  | Obrigatório |
 | :-------------- | :----------------- | :----------------------------------------- | :---------- |
 | `Authorization` | `string`           | **JWT**                                    | true        |
 | `id`            | `number ou string` | **Id do Usuário passado no authorization** | true        |
